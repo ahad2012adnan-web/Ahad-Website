@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exotic_Ahad</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(270deg, #0d1117, #001f3f, #0d1117);
+  background-size: 600% 600%;
+  animation: gradientBG 15s ease infinite;
+  color: white;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Animated gradient */
+@keyframes gradientBG {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* Particle effect */
+.particle {
+  position: fixed;
+  background: rgba(0,255,255,0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-100px) translateX(50px);}
+  100% { transform: translateY(0) translateX(0);}
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease-out;
+  padding: 0 20px;
+}
+
+section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h1 {
+  font-size: 3rem;
+  color: #00fff0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+button {
+  padding: 15px 40px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 50px;
+  background: #00fff0;
+  color: #0d1117;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+button:hover {
+  background: #00c9c0;
+  box-shadow: 0 0 20px #00fff0;
+}
+</style>
+</head>
+<body>
+
+<!-- Particles container -->
+<div id="particles"></div>
+
+<section class="animate">
+  <h1>Welcome to Exotic_Ahad</h1>
+  <p>Building next-level websites with smooth animations and futuristic design.</p>
+  <button>Explore</button>
+</section>
+
+<section class="animate">
+  <h1>Our Services</h1>
+  <p>Web Development, Automation, UI/UX Design, Custom Scripts — everything tailored for your startup needs.</p>
+</section>
+
+<section class="animate">
+  <h1>Why Choose Us?</h1>
+  <p>We create highly responsive, animated, and futuristic websites that leave a lasting impression.</p>
+</section>
+
+<script>
+// Fade-up animation on scroll
+const sections = document.querySelectorAll('.animate');
+function checkSection() {
+  const triggerBottom = window.innerHeight * 0.85;
+  sections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    if (sectionTop < triggerBottom) {
+      section.classList.add('active');
+    } else {
+      section.classList.remove('active');
+    }
+  });
+}
+window.addEventListener('scroll', checkSection);
+window.addEventListener('load', checkSection);
+
+// Create floating particles
+const particleContainer = document.getElementById('particles');
+const totalParticles = 30;
+for(let i=0;i<totalParticles;i++){
+  let p = document.createElement('div');
+  p.classList.add('particle');
+  let size = Math.random()*8 + 4;
+  p.style.width = size+'px';
+  p.style.height = size+'px';
+  p.style.left = Math.random()*window.innerWidth+'px';
+  p.style.top = Math.random()*window.innerHeight+'px';
+  p.style.animationDuration = (5 + Math.random()*10)+'s';
+  particleContainer.appendChild(p);
+}
+</script>
+
+</body>
+</html>
